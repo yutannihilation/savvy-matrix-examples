@@ -219,7 +219,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "savvyMatrixExamples"
+name = "savvy-matrix-examples"
 version = "0.1.0"
 dependencies = [
  "glam",

@@ -32,6 +32,17 @@ SEXP handle_result(SEXP res_) {
     return (SEXP)res;
 }
 
+SEXP glam_input__impl(SEXP x) {
+    SEXP res = glam_input(x);
+    return handle_result(res);
+}
+
+SEXP glam_output__impl(void) {
+    SEXP res = glam_output();
+    return handle_result(res);
+}
+
+
 SEXP nalgebra_input__impl(SEXP x) {
     SEXP res = nalgebra_input(x);
     return handle_result(res);
@@ -52,24 +63,15 @@ SEXP ndarray_output__impl(void) {
     return handle_result(res);
 }
 
-SEXP glam_input__impl(SEXP x) {
-    SEXP res = glam_input(x);
-    return handle_result(res);
-}
-
-SEXP glam_output__impl(void) {
-    SEXP res = glam_output();
-    return handle_result(res);
-}
-
 
 static const R_CallMethodDef CallEntries[] = {
+    {"glam_input__impl", (DL_FUNC) &glam_input__impl, 1},
+    {"glam_output__impl", (DL_FUNC) &glam_output__impl, 0},
+
     {"nalgebra_input__impl", (DL_FUNC) &nalgebra_input__impl, 1},
     {"nalgebra_output__impl", (DL_FUNC) &nalgebra_output__impl, 0},
     {"ndarray_input__impl", (DL_FUNC) &ndarray_input__impl, 1},
     {"ndarray_output__impl", (DL_FUNC) &ndarray_output__impl, 0},
-    {"glam_input__impl", (DL_FUNC) &glam_input__impl, 1},
-    {"glam_output__impl", (DL_FUNC) &glam_output__impl, 0},
     {NULL, NULL, 0}
 };
 

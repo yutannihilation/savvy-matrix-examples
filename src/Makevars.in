@@ -2,8 +2,8 @@ TARGET = @TARGET@
 
 TARGET_DIR = $(CURDIR)/rust/target
 LIBDIR = $(TARGET_DIR)/$(TARGET)/release
-STATLIB = $(LIBDIR)/libsavvyMatrixExamples.a
-PKG_LIBS = -L$(LIBDIR) -lsavvyMatrixExamples
+STATLIB = $(LIBDIR)/libsavvy_matrix_examples.a
+PKG_LIBS = -L$(LIBDIR) -lsavvy_matrix_examples
 
 CARGO_BUILD_ARGS = --lib --release --manifest-path=./rust/Cargo.toml --target-dir $(TARGET_DIR)
 
