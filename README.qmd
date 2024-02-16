@@ -1,0 +1,57 @@
+---
+title: "Savvy Examples - Matrix Handling"
+format: gfm
+editor: visual
+---
+
+```{r}
+#| label: "setup"
+#| include: false
+
+library(savvyMatrixExamples)
+```
+
+This repository is an example to show how to deal with matrices with [the savvy framework](https://yutannihilation.github.io/savvy/guide/).
+
+## ndarray
+
+[code](https://github.com/yutannihilation/savvy-matrix-examples/blob/master/src/rust/src/ndarray.rs)
+
+```{r}
+m <- rbind(
+  c(1.0, 3.0, 5.0),
+  c(2.0, 4.0, 6.0)
+)
+
+ndarray_input(m)
+
+ndarray_output()
+```
+
+## nalgebra
+
+[code](https://github.com/yutannihilation/savvy-matrix-examples/blob/master/src/rust/src/nalgebra.rs)
+
+```{r}
+m <- rbind(
+  c(1.0, 3.0, 5.0),
+  c(2.0, 4.0, 6.0)
+)
+
+nalgebra_input(m)
+
+nalgebra_output()
+```
+
+## glam-rs
+
+[code](https://github.com/yutannihilation/savvy-matrix-examples/blob/master/src/rust/src/glam.rs)
+
+```{r}
+m <- as.numeric(1:9)
+dim(m) <- c(3, 3)
+
+glam_input(m)
+
+glam_output()
+```

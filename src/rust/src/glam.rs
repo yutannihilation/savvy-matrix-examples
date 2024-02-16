@@ -4,12 +4,7 @@ use savvy::{r_println, savvy, OwnedRealSexp, RealSexp};
 /// @export
 #[savvy]
 fn glam_input(x: RealSexp) -> savvy::Result<()> {
-    let dim = match x.get_dim() {
-        Some(dim) => dim,
-        None => {
-            return Err("no dimension found!".into());
-        }
-    };
+    let dim = x.get_dim().ok_or("no dimension found")?;
 
     if dim.as_slice() != [3, 3] {
         return Err("Input must be 3x3 matrix!".into());

@@ -9,12 +9,7 @@ use savvy::{r_println, savvy, RealSexp};
 /// @export
 #[savvy]
 fn ndarray_input(x: RealSexp) -> savvy::Result<()> {
-    let dim = match x.get_dim() {
-        Some(dim) => dim,
-        None => {
-            return Err("no dimension found!".into());
-        }
-    };
+    let dim = x.get_dim().ok_or("no dimension found")?;
 
     // f() changes the order from row-major (C-style convention) to column-major (Fortran-style convention).
     let a = Array::from_shape_vec(dim.f(), x.to_vec());

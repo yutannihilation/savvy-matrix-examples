@@ -4,12 +4,7 @@ use savvy::{r_println, savvy, OwnedRealSexp, RealSexp};
 /// @export
 #[savvy]
 fn nalgebra_input(x: RealSexp) -> savvy::Result<()> {
-    let dim = match x.get_dim() {
-        Some(dim) => dim,
-        None => {
-            return Err("no dimension found!".into());
-        }
-    };
+    let dim = x.get_dim().ok_or("no dimension found")?;
 
     if dim.len() != 2 {
         return Err("Input must be matrix!".into());
