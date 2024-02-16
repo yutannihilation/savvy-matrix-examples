@@ -9,7 +9,7 @@ editor: visual
 #| include: false
 
 knitr::opts_chunk$set(
-  collapse = FALSE,
+  collapse = TRUE,
   comment = "#>"
 )
 
