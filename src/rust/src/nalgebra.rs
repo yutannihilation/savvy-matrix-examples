@@ -10,7 +10,7 @@ fn nalgebra_input(x: RealSexp) -> savvy::Result<()> {
         return Err("Input must be matrix!".into());
     }
 
-    let m = DMatrix::from_vec(dim[0], dim[1], x.to_vec());
+    let m = DMatrix::from_vec(dim[0] as _, dim[1] as _, x.to_vec());
 
     r_println!("{m:?}");
 

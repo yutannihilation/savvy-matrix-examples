@@ -10,4 +10,4 @@ crate-type = ["staticlib"]
 glam = "0.25"
 nalgebra = "0.32"
 ndarray = "0.15"
-savvy = "*"
+savvy = { version = "*", git = "https://github.com/yutannihilation/savvy" }
