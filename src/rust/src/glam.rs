@@ -1,13 +1,13 @@
 use glam::{dmat3, dvec3, DMat3};
-use savvy::{r_println, savvy, OwnedRealSexp, RealSexp};
+use savvy::{r_println, savvy, savvy_err, OwnedRealSexp, RealSexp};
 
 /// @export
 #[savvy]
 fn glam_input(x: RealSexp) -> savvy::Result<()> {
-    let dim = x.get_dim().ok_or("no dimension found")?;
+    let dim = x.get_dim().ok_or(savvy_err!("no dimension found"))?;
 
     if dim != [3, 3] {
-        return Err("Input must be 3x3 matrix!".into());
+        return Err(savvy_err!("Input must be 3x3 matrix!"));
     }
 
     // As we already check the dimension, this must not fail

@@ -1,6 +1,8 @@
 
 #include <stdint.h>
 #include <Rinternals.h>
+#include <R_ext/Parse.h>
+
 #include "rust/api.h"
 
 static uintptr_t TAGGED_POINTER_MASK = (uintptr_t)1;
@@ -32,50 +34,51 @@ SEXP handle_result(SEXP res_) {
     return (SEXP)res;
 }
 
-SEXP glam_input__impl(SEXP x) {
-    SEXP res = glam_input(x);
+SEXP savvy_ndarray_input__impl(SEXP c_arg__x) {
+    SEXP res = savvy_ndarray_input__ffi(c_arg__x);
     return handle_result(res);
 }
 
-SEXP glam_output__impl(void) {
-    SEXP res = glam_output();
+SEXP savvy_ndarray_output__impl(void) {
+    SEXP res = savvy_ndarray_output__ffi();
     return handle_result(res);
 }
 
-
-SEXP nalgebra_input__impl(SEXP x) {
-    SEXP res = nalgebra_input(x);
+SEXP savvy_nalgebra_input__impl(SEXP c_arg__x) {
+    SEXP res = savvy_nalgebra_input__ffi(c_arg__x);
     return handle_result(res);
 }
 
-SEXP nalgebra_output__impl(void) {
-    SEXP res = nalgebra_output();
+SEXP savvy_nalgebra_output__impl(void) {
+    SEXP res = savvy_nalgebra_output__ffi();
     return handle_result(res);
 }
 
-SEXP ndarray_input__impl(SEXP x) {
-    SEXP res = ndarray_input(x);
+SEXP savvy_glam_input__impl(SEXP c_arg__x) {
+    SEXP res = savvy_glam_input__ffi(c_arg__x);
     return handle_result(res);
 }
 
-SEXP ndarray_output__impl(void) {
-    SEXP res = ndarray_output();
+SEXP savvy_glam_output__impl(void) {
+    SEXP res = savvy_glam_output__ffi();
     return handle_result(res);
 }
 
 
 static const R_CallMethodDef CallEntries[] = {
-    {"glam_input__impl", (DL_FUNC) &glam_input__impl, 1},
-    {"glam_output__impl", (DL_FUNC) &glam_output__impl, 0},
-
-    {"nalgebra_input__impl", (DL_FUNC) &nalgebra_input__impl, 1},
-    {"nalgebra_output__impl", (DL_FUNC) &nalgebra_output__impl, 0},
-    {"ndarray_input__impl", (DL_FUNC) &ndarray_input__impl, 1},
-    {"ndarray_output__impl", (DL_FUNC) &ndarray_output__impl, 0},
+    {"savvy_ndarray_input__impl", (DL_FUNC) &savvy_ndarray_input__impl, 1},
+    {"savvy_ndarray_output__impl", (DL_FUNC) &savvy_ndarray_output__impl, 0},
+    {"savvy_nalgebra_input__impl", (DL_FUNC) &savvy_nalgebra_input__impl, 1},
+    {"savvy_nalgebra_output__impl", (DL_FUNC) &savvy_nalgebra_output__impl, 0},
+    {"savvy_glam_input__impl", (DL_FUNC) &savvy_glam_input__impl, 1},
+    {"savvy_glam_output__impl", (DL_FUNC) &savvy_glam_output__impl, 0},
     {NULL, NULL, 0}
 };
 
 void R_init_savvyMatrixExamples(DllInfo *dll) {
-  R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
-  R_useDynamicSymbols(dll, FALSE);
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+
+    // Functions for initialzation, if any.
+
 }

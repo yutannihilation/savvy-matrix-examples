@@ -1,13 +1,13 @@
 use nalgebra::DMatrix;
-use savvy::{r_println, savvy, OwnedRealSexp, RealSexp};
+use savvy::{r_println, savvy, savvy_err, OwnedRealSexp, RealSexp};
 
 /// @export
 #[savvy]
 fn nalgebra_input(x: RealSexp) -> savvy::Result<()> {
-    let dim = x.get_dim().ok_or("no dimension found")?;
+    let dim = x.get_dim().ok_or(savvy_err!("no dimension found"))?;
 
     if dim.len() != 2 {
-        return Err("Input must be matrix!".into());
+        return Err(savvy_err!("Input must be matrix!"));
     }
 
     let m = DMatrix::from_vec(dim[0] as _, dim[1] as _, x.to_vec());

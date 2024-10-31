@@ -3,6 +3,7 @@ use ndarray::Array;
 use ndarray::Dimension;
 use ndarray::IntoDimension;
 use ndarray::ShapeBuilder;
+use savvy::savvy_err;
 use savvy::OwnedRealSexp;
 use savvy::{r_println, savvy, RealSexp};
 
@@ -10,7 +11,7 @@ use savvy::{r_println, savvy, RealSexp};
 #[savvy]
 fn ndarray_input(x: RealSexp) -> savvy::Result<()> {
     // In R, dim is i32, so you need to convert it to usize first.
-    let dim_i32 = x.get_dim().ok_or("no dimension found")?;
+    let dim_i32 = x.get_dim().ok_or(savvy_err!("no dimension found"))?;
     let dim: Vec<usize> = dim_i32.iter().map(|i| *i as usize).collect();
 
     // f() changes the order from row-major (C-style convention) to column-major (Fortran-style convention).
@@ -34,7 +35,7 @@ fn ndarray_output() -> savvy::Result<savvy::Sexp> {
     // to a slice without unsafe.
     match dim.into_dimension().as_array_view().as_slice() {
         Some(d) => out.set_dim(d)?,
-        None => return Err("Failed to get dimension as slice".into()),
+        None => return Err(savvy_err!("Failed to get dimension as slice")),
     }
 
     out.into()
