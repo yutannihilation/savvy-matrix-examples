@@ -30,7 +30,10 @@ fn ndarray_output() -> savvy::Result<savvy::Sexp> {
     let a_column_major = a_row_major.reversed_axes();
     let dim = a_column_major.dim();
 
-    let mut out = OwnedRealSexp::try_from(a_column_major.into_raw_vec())?;
+    let (vec, offset) = a_column_major.into_raw_vec_and_offset();
+    let offset = offset.unwrap_or(0);
+    let vec_view = &vec[offset..(offset + dim.0 * dim.1)];
+    let mut out = OwnedRealSexp::try_from(vec_view)?;
     // It seems there's no handy way to convert an arbitrary dimension of tuple
     // to a slice without unsafe.
     match dim.into_dimension().as_array_view().as_slice() {
