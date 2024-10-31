@@ -7,7 +7,7 @@ edition = "2021"
 crate-type = ["staticlib"]
 
 [dependencies]
-glam = "0.25"
-nalgebra = "0.32"
-ndarray = "0.15"
+glam = "0.29"
+nalgebra = "0.33"
+ndarray = "0.16"
 savvy = "0.8.0"
